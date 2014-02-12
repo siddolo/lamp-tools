@@ -57,44 +57,44 @@ printf "\tCHROOT JAIL: /var/www/${VHOST_NAME}\n\n"
 read -r -p "Are you shure to continue? Check again. [y/N] " response
 case $response in
         [yY])
-                useradd -g www-data -d /var/www/${VHOST_NAME} -m -s /bin/false ${VHOST_NAME}
-                echo "${VHOST_NAME}:${SFTPWD}" | chpasswd
-                mkdir /var/www/${VHOST_NAME}/htdocs
-      			  	mkdir /var/www/${VHOST_NAME}/tmp
-        				mkdir /var/www/${VHOST_NAME}/log
-                chown ${VHOST_NAME}:www-data /var/www/${VHOST_NAME}/htdocs
-				        chown ${VHOST_NAME}:www-data /var/www/${VHOST_NAME}/tmp
-        				chown ${VHOST_NAME}:www-data /var/www/${VHOST_NAME}/log
-                chown root:root /var/www/${VHOST_NAME}
-        				chmod 700 /var/www/${VHOST_NAME}/htdocs
-        				chmod 700 /var/www/${VHOST_NAME}/tmp
-        				chmod 700 /var/www/${VHOST_NAME}/log
-        				chmod 755 /var/www/${VHOST_NAME}
+		useradd -g www-data -d /var/www/${VHOST_NAME} -m -s /bin/false ${VHOST_NAME}
+		echo "${VHOST_NAME}:${SFTPWD}" | chpasswd
+		mkdir /var/www/${VHOST_NAME}/htdocs
+		mkdir /var/www/${VHOST_NAME}/tmp
+		mkdir /var/www/${VHOST_NAME}/log
+		chown ${VHOST_NAME}:www-data /var/www/${VHOST_NAME}/htdocs
+		chown ${VHOST_NAME}:www-data /var/www/${VHOST_NAME}/tmp
+		chown ${VHOST_NAME}:www-data /var/www/${VHOST_NAME}/log
+		chown root:root /var/www/${VHOST_NAME}
+		chmod 700 /var/www/${VHOST_NAME}/htdocs
+		chmod 700 /var/www/${VHOST_NAME}/tmp
+		chmod 700 /var/www/${VHOST_NAME}/log
+		chmod 755 /var/www/${VHOST_NAME}
 
-                read -r -p "Do you want to add a www.${VHOST_NAME} alias? [y/N] " response
-                case $response in
-                        [yY])
-                                cp /etc/apache2/sites-available/template_www_alias /etc/apache2/sites-available/${VHOST_NAME}
-                        ;;
-                        *)
-                                cp /etc/apache2/sites-available/template /etc/apache2/sites-available/${VHOST_NAME}
-                        ;;
-                esac
+		read -r -p "Do you want to add a www.${VHOST_NAME} alias? [y/N] " response
+		case $response in
+			[yY])
+				cp /etc/apache2/sites-available/template_www_alias /etc/apache2/sites-available/${VHOST_NAME}
+			;;
+			*)
+				cp /etc/apache2/sites-available/template /etc/apache2/sites-available/${VHOST_NAME}
+			;;
+		esac
 
-                sed -i 's/__VHOST_NAME__/'${VHOST_NAME}'/g' /etc/apache2/sites-available/${VHOST_NAME}
+		sed -i 's/__VHOST_NAME__/'${VHOST_NAME}'/g' /etc/apache2/sites-available/${VHOST_NAME}
         				sed -i 's/__DOMAIN_NAME__/'${DOMAIN_NAME}'/g' /etc/apache2/sites-available/${VHOST_NAME}
-                ln -s /etc/apache2/sites-available/${VHOST_NAME} /etc/apache2/sites-enabled/${VHOST_NAME}
+		ln -s /etc/apache2/sites-available/${VHOST_NAME} /etc/apache2/sites-enabled/${VHOST_NAME}
 
-                echo "CREATE DATABASE ${SQLDB}; GRANT ALL PRIVILEGES ON ${SQLDB}.* TO ${SQLUSER}@localhost IDENTIFIED BY '${SQLPWD}';" | mysql -u ${ROOTSQLUSER} -p${ROOTSQLPASS}
+		echo "CREATE DATABASE ${SQLDB}; GRANT ALL PRIVILEGES ON ${SQLDB}.* TO ${SQLUSER}@localhost IDENTIFIED BY '${SQLPWD}';" | mysql -u ${ROOTSQLUSER} -p${ROOTSQLPASS}
 
-                read -r -p "Do you want to reload apache? (apache2ctl graceful) [y/N] " response
-                case $response in
-                        [yY])
-                                apache2ctl graceful
-                        ;;
-                esac
-        ;;
-        *)
-                exit
-        ;;
+		read -r -p "Do you want to reload apache? (apache2ctl graceful) [y/N] " response
+		case $response in
+			[yY])
+				apache2ctl graceful
+			;;
+		esac
+	;;
+	*)
+		exit
+	;;
 esac
