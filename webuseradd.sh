@@ -82,7 +82,7 @@ case $response in
 		esac
 
 		sed -i 's/__VHOST_NAME__/'${VHOST_NAME}'/g' /etc/apache2/sites-available/${VHOST_NAME}
-        				sed -i 's/__DOMAIN_NAME__/'${DOMAIN_NAME}'/g' /etc/apache2/sites-available/${VHOST_NAME}
+		sed -i 's/__DOMAIN_NAME__/'${DOMAIN_NAME}'/g' /etc/apache2/sites-available/${VHOST_NAME}
 		ln -s /etc/apache2/sites-available/${VHOST_NAME} /etc/apache2/sites-enabled/${VHOST_NAME}
 
 		echo "CREATE DATABASE ${SQLDB}; GRANT ALL PRIVILEGES ON ${SQLDB}.* TO ${SQLUSER}@localhost IDENTIFIED BY '${SQLPWD}';" | mysql -u ${ROOTSQLUSER} -p${ROOTSQLPASS}
