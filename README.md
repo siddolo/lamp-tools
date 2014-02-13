@@ -8,7 +8,7 @@ Simple apache2 vhost creation script
 
         root@webserver00:~# ./webuseradd.sh mydomain.com
 
-        Controllare e prendere appunti dei seguenti dati:
+        Chek and secure this data:
 
                 SFTP USERNAME: mydomain.com
                 SFTP PASSWORD: q7hJqpDuu2xieGvd
