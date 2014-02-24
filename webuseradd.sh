@@ -54,7 +54,7 @@ printf "\tDOMAIN NAME: ${DOMAIN_NAME}\n"
 printf "\tWEB ROOT: /var/www/${VHOST_NAME}/htdocs\n"
 printf "\tCHROOT JAIL: /var/www/${VHOST_NAME}\n\n"
 
-read -r -p "Are you shure to continue? Check again. [y/N] " response
+read -r -p "Are you sure to continue? Check again. [y/N] " response
 case $response in
         [yY])
 		useradd -g www-data -d /var/www/${VHOST_NAME} -m -s /bin/false ${VHOST_NAME}
