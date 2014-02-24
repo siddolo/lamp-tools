@@ -22,7 +22,7 @@ Simple apache2 vhost creation script
                 WEB ROOT: /var/www/mydomain.com/htdocs
                 CHROOT JAIL: /var/www/mydomain.com
 
-        Are you shure to continue? Check again. [y/N] y
+        Are you sure to continue? Check again. [y/N] y
         Do you want to add a www.mydomain.com alias? [y/N] y
         Do you want to reload apache? (apache2ctl graceful) [y/N] y
         root@webserver00:~# 
