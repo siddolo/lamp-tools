@@ -26,3 +26,11 @@ Simple apache2 vhost creation script
         Do you want to add a www.mydomain.com alias? [y/N] y
         Do you want to reload apache? (apache2ctl graceful) [y/N] y
         root@webserver00:~# 
+
+backup.sh
+=========
+
+Simple vhost & databases backup script
+You may want to schedule this task by adding a cron like this:
+
+        00 03 * * 0	/path/to/backup.sh > /dev/null 2>&1
