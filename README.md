@@ -31,6 +31,7 @@ backup.sh
 =========
 
 Simple vhost & databases backup script
+
 You may want to schedule this task by adding a cron like this:
 
         00 03 * * 0	/path/to/backup.sh > /dev/null 2>&1
