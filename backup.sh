@@ -16,6 +16,7 @@ REMOVEOLDERTHANDAYS=30
 
 ROOTSQLUSER="root"
 ROOTSQLPASS="pwd"
+MYSQLHOST="localhost"
 
 # backup vhosts
 for VHOST in $(ls ${WWWSOURCEDIR} | grep -v index.html)
@@ -26,7 +27,7 @@ done
 # backup databases
 for DATABASE in $(mysql -u ${ROOTSQLUSER} -p${ROOTSQLPASS} --batch --silent -e 'SHOW DATABASES' | grep -v -e mysql -e information_schema -e performance_schema -e phpmyadmin)
 do
-	mysqldump -u ${ROOTSQLUSER} -p${ROOTSQLPASS} ${DATABASE} | gzip > ${MYSQLBACKUPDIR}/$(date +%d-%m-%Y)_${DATABASE}.sql.gz
+	mysqldump -h ${MYSQLHOST} -u ${ROOTSQLUSER} -p${ROOTSQLPASS} ${DATABASE} | gzip > ${MYSQLBACKUPDIR}/$(date +%d-%m-%Y)_${DATABASE}.sql.gz
 done
 
 # remove old backup
