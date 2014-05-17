@@ -21,11 +21,11 @@ MYSQLHOST="localhost"
 # backup vhosts
 for VHOST in $(ls ${WWWSOURCEDIR} | grep -v index.html)
 do
-	tar -pczf ${WWWBACKUPDIR}/$(date +%d-%m-%Y)_${VHOST}.tar.gz /var/www/${VHOST} > /dev/null 2>&1
+	tar -pczf ${WWWBACKUPDIR}/$(date +%d-%m-%Y)_${VHOST}.tar.gz ${WWWSOURCEDIR}/${VHOST} > /dev/null 2>&1
 done
 
 # backup databases
-for DATABASE in $(mysql -u ${ROOTSQLUSER} -p${ROOTSQLPASS} --batch --silent -e 'SHOW DATABASES' | grep -v -e mysql -e information_schema -e performance_schema -e phpmyadmin)
+for DATABASE in $(mysql -h ${MYSQLHOST} -u ${ROOTSQLUSER} -p${ROOTSQLPASS} --batch --silent -e 'SHOW DATABASES' | grep -v -e mysql -e information_schema -e performance_schema -e phpmyadmin)
 do
 	mysqldump -h ${MYSQLHOST} -u ${ROOTSQLUSER} -p${ROOTSQLPASS} ${DATABASE} | gzip > ${MYSQLBACKUPDIR}/$(date +%d-%m-%Y)_${DATABASE}.sql.gz
 done
