@@ -19,6 +19,7 @@
 
 ROOTSQLUSER="root"
 ROOTSQLPASS="pwd"
+UMASK="077"
 
 if [ $# -lt 1 ]; then
         printf "\nUsage: $0 [vhost_name]\n"
@@ -70,6 +71,7 @@ case $response in
 		chmod 700 /var/www/${VHOST_NAME}/tmp
 		chmod 700 /var/www/${VHOST_NAME}/log
 		chmod 755 /var/www/${VHOST_NAME}
+		echo "umask ${UMASK}" >> /var/www/${VHOST_NAME}/.profile
 
 		read -r -p "Do you want to add a www.${VHOST_NAME} alias? [y/N] " response
 		case $response in
