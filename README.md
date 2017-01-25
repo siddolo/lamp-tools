@@ -30,7 +30,7 @@ Simple apache2 vhost creation script
 backup.sh
 =========
 
-Simple vhost & databases backup script
+Simple vhost & databases backup script (local + aws s3)
 
 You may want to schedule this task by adding a cron like this:
 
